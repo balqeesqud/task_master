@@ -27,7 +27,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="411dp"
-        android:layout_height="63dp"
+        android:layout_height="65dp"
         android:background="#9E3A46"
         android:gravity="center"
         android:text="@string/taskmaster"
@@ -51,10 +51,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.169"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintVertical_bias="0.142" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -157,13 +157,15 @@
 
     <ImageButton
         android:id="@+id/settingsImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_width="45dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:backgroundTint="#9C3945"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.777"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_manage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

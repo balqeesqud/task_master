@@ -40,7 +40,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), "Submitted!!", Toast.LENGTH_SHORT);
                 toast.show();
                 TextView count = findViewById(R.id.counter);
-                count.setText(String.valueOf(x++));
+                count.setText("Total Tasks:" + String.valueOf(x++));
             }
         });
 
