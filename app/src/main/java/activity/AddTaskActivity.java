@@ -1,6 +1,5 @@
-package com.example.taskmaster;
+package activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.taskmaster.R;
+
 public class AddTaskActivity extends AppCompatActivity {
 
     private EditText taskTileEditText;
@@ -20,6 +21,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
@@ -31,11 +33,14 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         SubmitAddTask.setOnClickListener(new View.OnClickListener() {
+            int x = 0;
 
             @Override
             public void onClick(View view) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Submitted!!", Toast.LENGTH_SHORT);
                 toast.show();
+                TextView count = findViewById(R.id.counter);
+                count.setText(String.valueOf(x++));
             }
         });
 
@@ -46,7 +51,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
 
     }
 }

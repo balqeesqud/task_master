@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#FCF8FB"
     android:hapticFeedbackEnabled="false"
     tools:ignore="ExtraText">
 
@@ -104,8 +104,8 @@
         android:id="@+id/SubmitAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
         android:backgroundTint="#BA0F0F"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -127,7 +127,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/TotalTasks"
+        android:id="@+id/counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Tasks : 0"

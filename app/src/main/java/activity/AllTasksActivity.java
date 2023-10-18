@@ -1,10 +1,12 @@
-package com.example.taskmaster;
+package activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.taskmaster.R;
 
 public class AllTasksActivity extends AppCompatActivity {
 
