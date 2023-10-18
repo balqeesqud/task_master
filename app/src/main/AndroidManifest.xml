@@ -13,6 +13,21 @@
         android:theme="@style/Theme.Taskmaster"
         tools:targetApi="31">
         <activity
+            android:name="activity.SettingsActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+
+        <activity
+            android:name="activity.TaskDetailActivity"
+            android:exported="false" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -20,26 +35,23 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
-            android:name=".AddTaskActivity"
+            android:name="activity.AddTaskActivity"
             android:label="Add Task">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name=".AllTasksActivity"
+            android:name="activity.AllTasksActivity"
             android:label="All Tasks">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+
     </application>
 
 </manifest>
