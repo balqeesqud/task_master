@@ -90,10 +90,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateUsername();
-    }
-
-    private void updateUsername() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = sharedPreferences.getString(USERNAME_TAG, "");
         if (username != null) {
@@ -101,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             usernameTextView.setText(username + "'s tasks");
         }
     }
+
 
     private void openTaskDetail(String taskTitle) {
         Intent taskDetailIntent = new Intent(MainActivity.this, TaskDetailActivity.class);
