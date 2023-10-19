@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // Set a click listener for each task button
+        // Setting a click listener for each task button
         taskButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,32 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        taskButton1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent detailPage = new Intent(MainActivity.this, TaskDetailActivity.class);
-//                startActivity(detailPage);
-//
-//            }
-//        });
-//
-//        taskButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent detailPage = new Intent(MainActivity.this, TaskDetailActivity.class);
-//                startActivity(detailPage);
-//
-//            }
-//        });
-//
-//        taskButton3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent detailPage = new Intent(MainActivity.this, TaskDetailActivity.class);
-//                startActivity(detailPage);
-//
-//            }
-//        });
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,10 +85,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUsername();
+    }
+
+    private void updateUsername() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = sharedPreferences.getString(USERNAME_TAG, "");
-        if (username!=null) {
+        if (username != null) {
+            TextView usernameTextView = findViewById(R.id.usernameTextView);
             usernameTextView.setText(username + "'s tasks");
         }
     }
