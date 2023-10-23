@@ -56,16 +56,17 @@
         android:id="@+id/TaskTitleTextView"
         android:layout_width="169dp"
         android:layout_height="34dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:text="@string/task_title"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/TaskDetailDescription"
@@ -80,8 +81,22 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.691"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/TaskStateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Task State: "
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TaskTitleTextView" />
 
     <TextView
         android:id="@+id/DescriptionWordTextView"

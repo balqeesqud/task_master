@@ -19,4 +19,6 @@
     <string name="save">Save</string>
     <string name="current_username">Current Username: %s</string>
     <string name="task_title">Task Title</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Task</string>
 </resources>
