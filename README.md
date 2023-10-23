@@ -15,11 +15,16 @@ following elements:
 - **User Tasks Buttons:** At the bottom of the homepage, users are presented with buttons that
   allow them to navigate to their tasks that will takes them into details of the task they press on.
 - **Image Button of Settings:** At the top right corner an icon added to represent settings page.  
+- **Recycler View:** To display a list of tasks. I've included hardcoded Task data to demonstrate 
+  this feature.
+![Home](screenshots/Home3.jpeg)
+![Scrolling](screenshots/Scrolling.jpeg)
 
-![Home](screenshots/Home2.jpeg)
 
 
-### Add a Task
+
+
+## Add a Task
 
 Allows users to input details about a new task, including a title and a body. Key features 
 of this page are as follows:
@@ -33,7 +38,7 @@ of this page are as follows:
 ![Home](screenshots/addtask.jpeg)
 
 
-### All Tasks
+## All Tasks
 
 The "All Tasks" page is a simple view consisting of an image and a back button. This page serves 
 the purpose of displaying all tasks without additional functionality. Users can return to the 
@@ -45,7 +50,7 @@ previous page using the back button.
 ![allTasks](screenshots/alltasks.jpeg)
 
 
-### Settings 
+## Settings 
 
 The Settings page in the TaskMaster app allows users to customize their app experience by 
 setting their username, Here's what users can do on the Settings page:
@@ -56,6 +61,13 @@ setting their username, Here's what users can do on the Settings page:
 
 
 ![settings](screenshots/settings.jpeg)
+
+
+## RecyclerView
+
+Created five hardcoded `Task` instances and used them to populate the `RecyclerView` 
+through the `ViewAdapter`. This not only showcases the functionality but also serves as a 
+starting point for displaying real task data.
 
 
 
@@ -69,3 +81,8 @@ Here's what users can do on the Task Detail page:
   selected task. 
 
 ![Task Details ](screenshots/exercisingTask.jpeg)
+
+![TaskDetail](screenshots/TDRV.jpeg)
+![TaskDetail](screenshots/TDRV2.jpeg)
+
+
