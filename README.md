@@ -1,5 +1,6 @@
 # task_master
 
+## Features
 
 ### Homepage
 
@@ -17,28 +18,37 @@ following elements:
 - **Image Button of Settings:** At the top right corner an icon added to represent settings page.  
 - **Recycler View:** To display a list of tasks. I've included hardcoded Task data to demonstrate 
   this feature.
-![Home](screenshots/Home3.jpeg)
+![Home](screenshots/Home4.jpeg)
 ![Scrolling](screenshots/Scrolling.jpeg)
 
 
+### Task Model and Room
+Room is a local database solution that helps us persist data in our Android application. I've
+integrated Room into the TaskMaster app to manage tasks efficiently.I did this by following these
+steps:
+- Setting up Room following the Android documentation and from the class 29 notes.
+- Modifying the `Task` class to be an Entity, meaning it will be stored in the local database.
+- User can Add a task and store it in the local database.
+- Displays a list of tasks using a RecyclerView. This RecyclerView is populated with all `Task`
+  entities stored in the local database.
 
 
-
-## Add a Task
+### Add a Task
 
 Allows users to input details about a new task, including a title and a body. Key features 
 of this page are as follows:
 
 - **Title and Body Input:** Users can enter a task title and a description in text fields 
   provided on the page.
-- **Submission:** When the user clicks the "Submit" button, a "submitted!" label is displayed on 
-  the page to confirm that the task has been successfully added.
+- **Spinner Task State:** User can choose the state of the task that will be saved. 
+- **Save Task:** When the user clicks the "Save" button, a "Your Task was saved" label is
+displayed on the page to confirm that the task has been successfully saved.
 
 
-![Home](screenshots/addtask.jpeg)
+![Home](screenshots/addtaskform.jpeg)
 
 
-## All Tasks
+### All Tasks
 
 The "All Tasks" page is a simple view consisting of an image and a back button. This page serves 
 the purpose of displaying all tasks without additional functionality. Users can return to the 
@@ -46,11 +56,12 @@ previous page using the back button.
 
 
 
+![allTasks](screenshots/AllTask1.jpeg)
+![allTasks](screenshots/alltasks2.jpeg)
 
-![allTasks](screenshots/alltasks.jpeg)
 
 
-## Settings 
+### Settings 
 
 The Settings page in the TaskMaster app allows users to customize their app experience by 
 setting their username, Here's what users can do on the Settings page:
@@ -63,7 +74,7 @@ setting their username, Here's what users can do on the Settings page:
 ![settings](screenshots/settings.jpeg)
 
 
-## RecyclerView
+### RecyclerView
 
 Created five hardcoded `Task` instances and used them to populate the `RecyclerView` 
 through the `ViewAdapter`. This not only showcases the functionality but also serves as a 
@@ -80,9 +91,8 @@ Here's what users can do on the Task Detail page:
 - View Task Description: Below the task title, they can read a detailed description of the 
   selected task. 
 
-![Task Details ](screenshots/exercisingTask.jpeg)
+![Task Details ](screenshots/Taskdetail2.jpeg)
 
-![TaskDetail](screenshots/TDRV.jpeg)
-![TaskDetail](screenshots/TDRV2.jpeg)
+
 
 

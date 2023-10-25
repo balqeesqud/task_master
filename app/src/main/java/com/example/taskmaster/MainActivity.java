@@ -4,6 +4,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import activity.AddTaskActivity;
@@ -23,18 +25,36 @@ import activity.AllTasksActivity;
 import activity.SettingsActivity;
 import activity.TaskDetailActivity;
 import adapter.TasksListRecyclerViewAdapter;
+import dao.TaskDao;
+import database.TaskMasterDatabase;
 import enums.TaskState;
 import model.Task;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String USERNAME_TAG = "username";
+    public static final String DATABASE_NAME = "task_master";
     private String username;
+    List <Task> tasks=null;
 
+    TaskMasterDatabase taskMasterDatabase;
+
+    TasksListRecyclerViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        taskMasterDatabase = Room.databaseBuilder(
+                        getApplicationContext(),
+                        TaskMasterDatabase.class,
+                        DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
+
+        tasks=taskMasterDatabase.taskDao().findAll();
 
         Button addTaskBtn = (Button) findViewById(R.id.AddTaskButton);
         Button allTaskBtn = (Button) findViewById(R.id.AllTaskButton);
@@ -62,30 +82,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // Setting a click listener for each task button
-//        taskButton1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openTaskDetail(taskButton1.getText().toString());
-//            }
-//        });
-//
-//        taskButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openTaskDetail(taskButton2.getText().toString());
-//            }
-//        });
-//
-//        taskButton3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openTaskDetail(taskButton3.getText().toString());
-//            }
-//        });
-//
-
-
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,23 +91,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        RecyclerView TaskListRecyclerView= findViewById(R.id.TaskListRecyclerView);
-        List<Task> taskList = new ArrayList<>();
+        RecyclerView TaskListRecyclerView = findViewById(R.id.TaskListRecyclerView);
 
-
-        taskList.add(new Task("Exercising", "Do Push Ups", TaskState.ASSIGNED));
-        taskList.add(new Task("Cooking", "cook Kabseih and a salad",  TaskState.IN_PROGRESS ));
-        taskList.add(new Task("Cleaning", "Clean Living Room", TaskState.COMPLETE ));
-        taskList.add(new Task("Shopping", "Check Zara for a new Jeans", TaskState.NEW));
-        taskList.add(new Task("See Friends", "Go out with friend on thursday Night",  TaskState.IN_PROGRESS ));
-        taskList.add(new Task("Studying", "Prepare my Lessons", TaskState.COMPLETE ));
-
-
-
-        RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         TaskListRecyclerView.setLayoutManager(layoutManager);
 
-        TasksListRecyclerViewAdapter adapter= new TasksListRecyclerViewAdapter(taskList, MainActivity.this);
+        adapter = new TasksListRecyclerViewAdapter(tasks, MainActivity.this);
+
         TaskListRecyclerView.setAdapter(adapter);
 
 
@@ -126,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
             TextView usernameTextView = findViewById(R.id.usernameTextView);
             usernameTextView.setText(username + "'s tasks");
         }
+
+        tasks.clear();
+        tasks.addAll(taskMasterDatabase.taskDao().findAll());
+        adapter.notifyDataSetChanged();
     }
 
 
