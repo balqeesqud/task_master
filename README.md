@@ -18,7 +18,7 @@ following elements:
 - **Image Button of Settings:** At the top right corner an icon added to represent settings page.  
 - **Recycler View:** To display a list of tasks. I've included hardcoded Task data to demonstrate 
   this feature.
-![Home](screenshots/Home3.jpeg)
+![Home](screenshots/Home4.jpeg)
 ![Scrolling](screenshots/Scrolling.jpeg)
 
 
@@ -45,7 +45,7 @@ of this page are as follows:
 displayed on the page to confirm that the task has been successfully saved.
 
 
-![Home](screenshots/addtask.jpeg)
+![Home](screenshots/addtaskform.jpeg)
 
 
 ### All Tasks
@@ -56,8 +56,8 @@ previous page using the back button.
 
 
 
-
-![allTasks](screenshots/alltasks.jpeg)
+![allTasks](screenshots/AllTask1.jpeg)
+![allTasks](screenshots/alltasks2.jpeg)
 
 
 
@@ -91,9 +91,8 @@ Here's what users can do on the Task Detail page:
 - View Task Description: Below the task title, they can read a detailed description of the 
   selected task. 
 
-![Task Details ](screenshots/exercisingTask.jpeg)
+![Task Details ](screenshots/Taskdetail2.jpeg)
 
-![TaskDetail](screenshots/TDRV.jpeg)
-![TaskDetail](screenshots/TDRV2.jpeg)
+
 
 

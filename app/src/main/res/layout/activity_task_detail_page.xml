@@ -52,27 +52,26 @@
         app:srcCompat="@android:drawable/ic_menu_revert"
         tools:ignore="MissingConstraints" />
 
+
     <TextView
         android:id="@+id/TaskTitleTextView"
         android:layout_width="169dp"
         android:layout_height="34dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:text="@string/task_title"
+        android:gravity="center"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:ignore="MissingConstraints" />
-
 
     <TextView
         android:id="@+id/TaskDetailDescription"
         android:layout_width="348dp"
         android:layout_height="252dp"
-        android:layout_marginBottom="184dp"
         android:text="@string/lorem_ipsum_description"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -80,23 +79,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.67"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/TaskStateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:text="Task State: "
-        android:textColor="#000000"
+        android:textColor="#910B0B"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TaskTitleTextView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.248" />
 
     <TextView
         android:id="@+id/DescriptionWordTextView"
@@ -104,13 +104,16 @@
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
         android:text="Description"
-        android:textColor="#000000"
+        android:textColor="#910B0B"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/TaskDetailDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

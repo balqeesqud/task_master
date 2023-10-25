@@ -81,7 +81,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/TaskListRecyclerView"
         android:layout_width="243dp"
-        android:layout_height="241dp"
+        android:layout_height="200dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
