@@ -1,16 +1,26 @@
 package model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import java.util.Date;
+
 import enums.TaskState;
 
+@Entity
 public class Task {
+    @PrimaryKey(autoGenerate = true)
+    public Long id;
     private String title;
     private String body;
     private TaskState state;
 
+    java.util.Date dateCreated;
 
-    public Task(String title, String body, TaskState state) {
+    public Task(String title, String body, Date dateCreated, TaskState state) {
         this.title = title;
         this.body = body;
+        this.dateCreated = dateCreated;
         this.state = state;
     }
 
@@ -36,5 +46,13 @@ public class Task {
 
     public void setState(TaskState state) {
         this.state = state;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
     }
 }
