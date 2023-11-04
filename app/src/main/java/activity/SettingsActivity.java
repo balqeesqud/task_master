@@ -22,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     TextView displayUsernameTextView;
     Button viewUsernameButton;
+    EditText UsernameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class SettingsActivity extends AppCompatActivity {
                 preferenceEditor.apply();
                 Log.d("SettingsActivity", "Username to save: " + usernameString);
                 Snackbar.make(findViewById(R.id.SettingsActivity), "Username saved", Snackbar.LENGTH_SHORT).show();
+
+                // Update the displayed username immediately
+                TextView currentUsernameTextView = findViewById(R.id.CurrentUsernameTextView);
+                currentUsernameTextView.setText(getString(R.string.current_username, usernameString));
             }
         });
 
@@ -66,7 +71,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         TextView currentUsernameTextView = findViewById(R.id.CurrentUsernameTextView);
         currentUsernameTextView.setText(getString(R.string.current_username, usernameString));
-
+        UsernameEditText=findViewById(R.id.UsernameEditText);
+        UsernameEditText.setText(usernameString);
 
     }
 }
