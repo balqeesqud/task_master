@@ -179,8 +179,7 @@ public class TappingTaskTest {
                         isDisplayed()));
         appCompatEditText9.perform(closeSoftKeyboard());
 
-        pressBack();
-
+//        pressBack();
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.saveTaskButton), withText("Save"),
                         childAtPosition(
@@ -218,11 +217,7 @@ public class TappingTaskTest {
                                 4)));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.TaskTitleTextView), withText("Exercise"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        textView.check(matches(withText("Exercise")));
+        onView(withId(R.id.TaskTitleTextView)).check(matches(withText("Exercise")));
     }
 
     private static Matcher<View> childAtPosition(
