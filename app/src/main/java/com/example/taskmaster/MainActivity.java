@@ -4,7 +4,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
+//import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,8 +25,9 @@ import activity.AllTasksActivity;
 import activity.SettingsActivity;
 import activity.TaskDetailActivity;
 import adapter.TasksListRecyclerViewAdapter;
-import dao.TaskDao;
-import database.TaskMasterDatabase;
+//import dao.TaskDao;
+//import database.TaskMasterDatabase;
+//import enums.TaskState;
 import enums.TaskState;
 import model.Task;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private String username;
     List <Task> tasks=null;
 
-    TaskMasterDatabase taskMasterDatabase;
+//    TaskMasterDatabase taskMasterDatabase;
 
     TasksListRecyclerViewAdapter adapter;
     @Override
@@ -45,16 +46,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        tasks = new ArrayList<>();
+        tasks.add(new Task("Cooking", "Buy Carrots", new Date(), TaskState.COMPLETE));
 
-        taskMasterDatabase = Room.databaseBuilder(
-                        getApplicationContext(),
-                        TaskMasterDatabase.class,
-                        DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
 
-        tasks=taskMasterDatabase.taskDao().findAll();
+        // TODO: We will convert it into GraphQL/DynamoDB
+       //   tasks=taskMasterDatabase.taskDao().findAll();
 
         Button addTaskBtn = (Button) findViewById(R.id.AddTaskButton);
         Button allTaskBtn = (Button) findViewById(R.id.AllTaskButton);
@@ -91,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
         RecyclerView TaskListRecyclerView = findViewById(R.id.TaskListRecyclerView);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -99,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TasksListRecyclerViewAdapter(tasks, MainActivity.this);
 
         TaskListRecyclerView.setAdapter(adapter);
+
 
 
     }
@@ -113,9 +112,9 @@ public class MainActivity extends AppCompatActivity {
             usernameTextView.setText(username + "'s tasks");
         }
 
-        tasks.clear();
-        tasks.addAll(taskMasterDatabase.taskDao().findAll());
-        adapter.notifyDataSetChanged();
+//        tasks.clear();
+//        tasks.addAll(taskMasterDatabase.taskDao().findAll());
+//        adapter.notifyDataSetChanged();
     }
 
 
