@@ -4,7 +4,6 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-//import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,29 +15,31 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.amplifyframework.datastore.generated.model.TaskStateEnum;
 
 import activity.AddTaskActivity;
 import activity.AllTasksActivity;
 import activity.SettingsActivity;
 import activity.TaskDetailActivity;
 import adapter.TasksListRecyclerViewAdapter;
-//import dao.TaskDao;
-//import database.TaskMasterDatabase;
-//import enums.TaskState;
-import enums.TaskState;
-import model.Task;
+import com.amplifyframework.datastore.generated.model.TaskStateEnum;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String USERNAME_TAG = "username";
     public static final String DATABASE_NAME = "task_master";
     private String username;
-    List <Task> tasks=null;
-
-//    TaskMasterDatabase taskMasterDatabase;
+    List<Task> tasks=null;
+    public static final String TAG = "addTaskActivity";
 
     TasksListRecyclerViewAdapter adapter;
     @Override
@@ -47,7 +48,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tasks = new ArrayList<>();
-        tasks.add(new Task("Cooking", "Buy Carrots", new Date(), TaskState.COMPLETE));
+
+        RecyclerView TaskListRecyclerView = findViewById(R.id.TaskListRecyclerView);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        TaskListRecyclerView.setLayoutManager(layoutManager);
+
+        adapter = new TasksListRecyclerViewAdapter(tasks, MainActivity.this);
+
+        TaskListRecyclerView.setAdapter(adapter);
+
+
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success ->
+                {
+                    Log.i(TAG, "Read Task successfully");
+                    tasks.clear();
+                    for (Task databaseTask : success.getData()){
+                        tasks.add(databaseTask);
+                    }
+                    //adapter.notifyDataSetChanged();
+                    runOnUiThread(() ->{
+                        adapter.notifyDataSetChanged();
+                    });
+                },
+                failure -> Log.i(TAG, "Couldn't read tasks from DynamoDB ")
+        );
+
+
 
 
         // TODO: We will convert it into GraphQL/DynamoDB
@@ -55,9 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button addTaskBtn = (Button) findViewById(R.id.AddTaskButton);
         Button allTaskBtn = (Button) findViewById(R.id.AllTaskButton);
-//        Button taskButton1 = findViewById(R.id.taskButton1);
-//        Button taskButton2 = findViewById(R.id.taskButton2);
-//        Button taskButton3 = findViewById(R.id.taskButton3);
         ImageButton settingsButton = findViewById(R.id.settingsImageButton);
         TextView usernameTextView = findViewById(R.id.usernameTextView);
 
@@ -89,14 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        RecyclerView TaskListRecyclerView = findViewById(R.id.TaskListRecyclerView);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        TaskListRecyclerView.setLayoutManager(layoutManager);
-
-        adapter = new TasksListRecyclerViewAdapter(tasks, MainActivity.this);
-
-        TaskListRecyclerView.setAdapter(adapter);
 
 
 
@@ -122,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         Intent taskDetailIntent = new Intent(MainActivity.this, TaskDetailActivity.class);
         taskDetailIntent.putExtra("taskTitle", taskTitle);
         taskDetailIntent.putExtra("Description", task.getBody());
-        taskDetailIntent.putExtra("taskState", task.getState().toString());
+        taskDetailIntent.putExtra("taskState", task.getTaskState().toString());
         startActivity(taskDetailIntent);
     }
 }

@@ -4,6 +4,7 @@ package activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -11,16 +12,17 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-//import androidx.room.Room;
 
-import com.example.taskmaster.MainActivity;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.example.taskmaster.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import adapter.TasksListRecyclerViewAdapter;
-//import database.TaskMasterDatabase;
-import model.Task;
+
 
 public class AllTasksActivity extends AppCompatActivity {
 
@@ -29,8 +31,8 @@ public class AllTasksActivity extends AppCompatActivity {
     private String username;
 
     List<Task> tasks=null;
+    public static final String TAG = "allTasksActivity";
 
-//    TaskMasterDatabase taskMasterDatabase;
 
     TasksListRecyclerViewAdapter adapter;
 
@@ -38,7 +40,7 @@ public class AllTasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_tasks);
-
+        tasks = new ArrayList<>();
 
        // TODO: We will convert it into GraphQL/DynamoDB
        //  tasks=taskMasterDatabase.taskDao().findAll();
@@ -61,6 +63,22 @@ public class AllTasksActivity extends AppCompatActivity {
 
         TaskListRecyclerView.setAdapter(adapter);
 
+        Amplify.API.query(
+                ModelQuery.list(Task.class),
+                success ->
+                {
+                    Log.i(TAG, "Read Task successfully");
+                    tasks.clear();
+                    for (Task databaseTask : success.getData()){
+                        tasks.add(databaseTask);
+                    }
+                    runOnUiThread(() ->{
+                        adapter.notifyDataSetChanged();
+                    });
+                },
+                failure -> Log.i(TAG, "Couldn't read tasks from DynamoDB ")
+        );
+
     }
 
     @Override
@@ -73,10 +91,6 @@ public class AllTasksActivity extends AppCompatActivity {
             usernameTextView.setText(username + "'s tasks");
         }
 
-//        tasks.clear();
-        // TODO: We will convert it into GraphQL/DynamoDB
-        //  tasks.addAll(taskMasterDatabase.taskDao().findAll());
-//        adapter.notifyDataSetChanged();
     }
 
 }
