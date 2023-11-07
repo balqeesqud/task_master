@@ -11,10 +11,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+//import androidx.room.Room;
 import com.example.taskmaster.R;
 import java.util.Date;
-import database.TaskMasterDatabase;
+//import database.TaskMasterDatabase;
 import enums.TaskState;
 import model.Task;
 
@@ -28,19 +28,21 @@ public class AddTaskActivity extends AppCompatActivity {
     private TextView submittedLabel;
 
     private Button saveTask;
-    TaskMasterDatabase taskMasterDatabase;
+//    TaskMasterDatabase taskMasterDatabase;
+    private int x = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-
-        taskMasterDatabase = Room.databaseBuilder(
-                        getApplicationContext(),
-                        TaskMasterDatabase.class,
-                        "task_master")
-                .allowMainThreadQueries()
-                .build();
+//
+//        taskMasterDatabase = Room.databaseBuilder(
+//                        getApplicationContext(),
+//                        TaskMasterDatabase.class,
+//                        "task_master")
+//                .allowMainThreadQueries()
+//                .build();
 
         Spinner taskStateSpinner = findViewById(R.id.addTaskStateSpinner);
         taskStateSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, TaskState.values()));
@@ -54,7 +56,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         saveTask.setOnClickListener(v -> {
-            int x = 0;
 
             String selectedValue = taskStateSpinner.getSelectedItem().toString();
 
@@ -72,15 +73,17 @@ public class AddTaskActivity extends AppCompatActivity {
                     TaskState.fromString(taskStateSpinner.getSelectedItem().toString())
             );
 
-            taskMasterDatabase.taskDao().insertTask(newTask);
+//            taskMasterDatabase.taskDao().insertTask(newTask);
 
             Toast toast = Toast.makeText(getApplicationContext(), "Your Task was saved!", Toast.LENGTH_SHORT);
             toast.show();
 
             // to count tasks and display the number of it, we need to count it from the database
-            int taskCount = taskMasterDatabase.taskDao().getTaskCount();
+//            int taskCount = taskMasterDatabase.taskDao().getTaskCount();
             TextView count = findViewById(R.id.counter);
-            count.setText("Total Tasks: " + taskCount);
+            count.setText("Total Tasks: " + ++x);
+
+//            count.setText("Total Tasks: " + taskCount);
 
 
 
@@ -88,7 +91,7 @@ public class AddTaskActivity extends AppCompatActivity {
 //            Toast toast = Toast.makeText(getApplicationContext(), "Your Task was saved!", Toast.LENGTH_SHORT);
 //            toast.show();
 //            TextView count = findViewById(R.id.counter);
-//            count.setText("Total Tasks:" + String.valueOf(x++));
+//            count.setText("Total Tasks:" + String.valueOf(++x));
 
 
 

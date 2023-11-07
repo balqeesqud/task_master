@@ -1,15 +1,11 @@
 package model;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
 import enums.TaskState;
 
-@Entity
 public class Task {
-    @PrimaryKey(autoGenerate = true)
     public Long id;
     private String title;
     private String body;

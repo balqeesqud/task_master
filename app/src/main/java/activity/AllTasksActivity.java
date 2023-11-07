@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
+//import androidx.room.Room;
 
 import com.example.taskmaster.MainActivity;
 import com.example.taskmaster.R;
@@ -19,7 +19,7 @@ import com.example.taskmaster.R;
 import java.util.List;
 
 import adapter.TasksListRecyclerViewAdapter;
-import database.TaskMasterDatabase;
+//import database.TaskMasterDatabase;
 import model.Task;
 
 public class AllTasksActivity extends AppCompatActivity {
@@ -30,7 +30,7 @@ public class AllTasksActivity extends AppCompatActivity {
 
     List<Task> tasks=null;
 
-    TaskMasterDatabase taskMasterDatabase;
+//    TaskMasterDatabase taskMasterDatabase;
 
     TasksListRecyclerViewAdapter adapter;
 
@@ -39,15 +39,9 @@ public class AllTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_tasks);
 
-        taskMasterDatabase = Room.databaseBuilder(
-                        getApplicationContext(),
-                        TaskMasterDatabase.class,
-                        DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
 
-        tasks=taskMasterDatabase.taskDao().findAll();
+       // TODO: We will convert it into GraphQL/DynamoDB
+       //  tasks=taskMasterDatabase.taskDao().findAll();
 
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener()
@@ -79,9 +73,10 @@ public class AllTasksActivity extends AppCompatActivity {
             usernameTextView.setText(username + "'s tasks");
         }
 
-        tasks.clear();
-        tasks.addAll(taskMasterDatabase.taskDao().findAll());
-        adapter.notifyDataSetChanged();
+//        tasks.clear();
+        // TODO: We will convert it into GraphQL/DynamoDB
+        //  tasks.addAll(taskMasterDatabase.taskDao().findAll());
+//        adapter.notifyDataSetChanged();
     }
 
 }
