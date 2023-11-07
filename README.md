@@ -1,8 +1,20 @@
 # task_master
 
+In this project, I will integrate AWS Amplify to add scalable backend functionality to our 
+Taskmaster app. AWS Amplify provides a convenient way to interact with cloud services, and we'll 
+be using it to store and manage tasks in DynamoDB.
+
+## Prerequisites
+- You should already have an AWS account.
+- Make sure you have the Amplify CLI installed. If not, install it by following the Amplify Getting
+  Started guide.
+
 ## Features
 
 ### Homepage
+
+Refactored homepage RecyclerView to display all Task entities from DynamoDB. Query the tasks 
+using Amplify and update your RecyclerView to display the cloud-based tasks.
 
 The main page of the application is designed to match the wireframe provided. It includes the
 following elements:
@@ -21,20 +33,10 @@ following elements:
 ![Home](screenshots/Home4.jpeg)
 ![Scrolling](screenshots/Scrolling.jpeg)
 
-
-### Task Model and Room
-Room is a local database solution that helps us persist data in our Android application. I've
-integrated Room into the TaskMaster app to manage tasks efficiently.I did this by following these
-steps:
-- Setting up Room following the Android documentation and from the class 29 notes.
-- Modifying the `Task` class to be an Entity, meaning it will be stored in the local database.
-- User can Add a task and store it in the local database.
-- Displays a list of tasks using a RecyclerView. This RecyclerView is populated with all `Task`
-  entities stored in the local database.
-
-
 ### Add a Task
 
+Modified Add Task form to save the data entered as a Task to DynamoDB. Used Amplify's data 
+management functions to create and save tasks.
 Allows users to input details about a new task, including a title and a body. Key features 
 of this page are as follows:
 
@@ -45,7 +47,7 @@ of this page are as follows:
 displayed on the page to confirm that the task has been successfully saved.
 
 
-![Home](screenshots/addtaskform.jpeg)
+![addTaskForm](screenshots/addtaskform.jpeg)
 
 
 ### All Tasks
