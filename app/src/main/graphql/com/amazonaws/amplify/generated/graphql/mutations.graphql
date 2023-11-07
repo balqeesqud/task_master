@@ -41,3 +41,51 @@ mutation DeleteTodo(
     __typename
   }
 }
+
+mutation CreateTask(
+  $input: CreateTaskInput!
+  $condition: ModelTaskConditionInput
+) {
+  createTask(input: $input, condition: $condition) {
+    id
+    title
+    body
+    TaskState
+    dateCreated
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation UpdateTask(
+  $input: UpdateTaskInput!
+  $condition: ModelTaskConditionInput
+) {
+  updateTask(input: $input, condition: $condition) {
+    id
+    title
+    body
+    TaskState
+    dateCreated
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+mutation DeleteTask(
+  $input: DeleteTaskInput!
+  $condition: ModelTaskConditionInput
+) {
+  deleteTask(input: $input, condition: $condition) {
+    id
+    title
+    body
+    TaskState
+    dateCreated
+    createdAt
+    updatedAt
+    __typename
+  }
+}

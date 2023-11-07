@@ -29,3 +29,37 @@ query ListTodos(
     __typename
   }
 }
+
+query GetTask($id: ID!) {
+  getTask(id: $id) {
+    id
+    title
+    body
+    TaskState
+    dateCreated
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListTasks(
+  $filter: ModelTaskFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      body
+      TaskState
+      dateCreated
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}

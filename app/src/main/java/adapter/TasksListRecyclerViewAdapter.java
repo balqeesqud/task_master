@@ -6,17 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.taskmaster.MainActivity;
+import com.amplifyframework.datastore.generated.model.Task;
 import com.example.taskmaster.R;
 
 import java.util.List;
 
 import activity.TaskDetailActivity;
-import model.Task;
+
 
 public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksListRecyclerViewAdapter.TaskListViewHolder> {
 
@@ -28,6 +26,7 @@ public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksList
         this.TaskList = taskList;
         this.MainActivity = MainActivity;
     }
+
 
     @NonNull
     @Override
@@ -41,7 +40,7 @@ public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksList
 
         TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.taskFragmentTextView);
         String taskName = TaskList.get(position).getTitle();
-        String taskState = TaskList.get(position).getState().name();
+        String taskState = TaskList.get(position).getTaskState().name();
         String taskBody = TaskList.get(position).getBody();
         taskFragmentTextView.setText(taskName);
 
