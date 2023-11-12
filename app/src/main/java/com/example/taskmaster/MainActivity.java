@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void queryTasks() {
-        // Query tasks based on the selected team
         Amplify.API.query(
                 ModelQuery.list(Task.class),
                 success -> {

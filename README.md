@@ -11,10 +11,19 @@ be using it to store and manage tasks in DynamoDB.
 
 ## Features
 
+- Task Creation: Users can create tasks with titles, descriptions, and assign them to specific teams.
+- Team Management: Teams can be created and managed to organize tasks effectively.
+- User Settings: Users can set their username and choose a team in the settings.
+
+
 ### Homepage
 
 Refactored homepage RecyclerView to display all Task entities from DynamoDB. Query the tasks 
 using Amplify and update your RecyclerView to display the cloud-based tasks.
+
+TaskMaster is built using Android and AWS Amplify. It allows users to create tasks and organize 
+them based on teams. The app includes features such as task creation, team management, and 
+user settings.
 
 The main page of the application is designed to match the wireframe provided. It includes the
 following elements:
@@ -30,7 +39,8 @@ following elements:
 - **Image Button of Settings:** At the top right corner an icon added to represent settings page.  
 - **Recycler View:** To display a list of tasks. I've included hardcoded Task data to demonstrate 
   this feature.
-![Home](screenshots/Home4.jpeg)
+
+![Home](screenshots/home5.jpeg)
 ![Scrolling](screenshots/Scrolling.jpeg)
 
 ### Add a Task
@@ -47,14 +57,14 @@ of this page are as follows:
 displayed on the page to confirm that the task has been successfully saved.
 
 
-![addTaskForm](screenshots/addtaskform.jpeg)
+![addTaskForm](screenshots/addTask5.jpeg)
 
 
 ### All Tasks
 
 The "All Tasks" page is a simple view consisting of an image and a back button. This page serves 
-the purpose of displaying all tasks without additional functionality. Users can return to the 
-previous page using the back button.
+the purpose of displaying all tasks based on user team without additional functionality. Users can
+return to the previous page using the back button.
 
 
 
@@ -66,14 +76,15 @@ previous page using the back button.
 ### Settings 
 
 The Settings page in the TaskMaster app allows users to customize their app experience by 
-setting their username, Here's what users can do on the Settings page:
+setting their username, and their team name Here's what users can do on the Settings page:
 - Set their Username
 - View their Current Username
+- Choose their Team
 - Snackbar Feedback: After successfully saving their username, they'll receive feedback in the  
   form of a Snackbar message confirming that your username has been saved.
 
 
-![settings](screenshots/settings.jpeg)
+![settings](screenshots/settings5.jpeg)
 
 
 ### RecyclerView
@@ -81,7 +92,6 @@ setting their username, Here's what users can do on the Settings page:
 Created five hardcoded `Task` instances and used them to populate the `RecyclerView` 
 through the `ViewAdapter`. This not only showcases the functionality but also serves as a 
 starting point for displaying real task data.
-
 
 
 ### Task Details 
