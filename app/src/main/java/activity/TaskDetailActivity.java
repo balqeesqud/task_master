@@ -35,11 +35,12 @@ public class TaskDetailActivity extends AppCompatActivity {
         TextView taskTitleTextView = findViewById(R.id.TaskTitleTextView);
         TextView taskStateTextView = findViewById(R.id.TaskStateTextView);
         TextView taskDescriptionTextView = findViewById(R.id.TaskDetailDescription);
-
+        TextView TeamTextView= findViewById(R.id.TeamTextView);
 
         String taskTitle = getIntent().getStringExtra("taskTitle");
         String taskState = getIntent().getStringExtra("taskState");
         String taskBody = getIntent().getStringExtra("Description");
+
 
         Log.d("TaskDetailActivity", "Received taskState: " + taskBody);
 
@@ -55,6 +56,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         if (taskBody != null) {
             taskDescriptionTextView.setText( taskBody);
         }
+
 
     }
 

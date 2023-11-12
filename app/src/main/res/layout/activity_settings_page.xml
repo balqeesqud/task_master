@@ -8,14 +8,7 @@
     android:background="#FCF8FB"
     tools:context="activity.SettingsActivity">
 
-<!--    <TextView-->
-<!--        android:id="@+id/displayUsernameTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:text=""-->
-<!--        android:visibility="gone"-->
-<!--        tools:ignore="MissingConstraints" />-->
+
 
     <TextView
         android:id="@+id/textView4"
@@ -59,21 +52,21 @@
         app:srcCompat="@android:drawable/ic_menu_revert"
         tools:ignore="MissingConstraints" />
 
+
     <TextView
         android:id="@+id/UsernameTextView"
         android:layout_width="101dp"
         android:layout_height="31dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="92dp"
         android:gravity="left"
         android:text="@string/username"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:guidelineUseRtl="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
 
     <EditText
         android:id="@+id/UsernameEditText"
@@ -99,10 +92,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478"
+        app:layout_constraintVertical_bias="0.745"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -119,6 +112,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/teamSpinner"
+        android:layout_width="296dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="40dp"
+        android:enabled="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:background="#D1A4A4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.373"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settingTeamNameTextView"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/settingTeamNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Team"
+        android:textColor="#BA0F0F"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UsernameEditText"
         tools:ignore="MissingConstraints" />
 
 

@@ -32,6 +32,7 @@ public class AllTasksActivity extends AppCompatActivity {
 
     List<Task> tasks=null;
     public static final String TAG = "allTasksActivity";
+    private String selectedTeam;
 
 
     TasksListRecyclerViewAdapter adapter;
@@ -41,9 +42,6 @@ public class AllTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_tasks);
         tasks = new ArrayList<>();
-
-       // TODO: We will convert it into GraphQL/DynamoDB
-       //  tasks=taskMasterDatabase.taskDao().findAll();
 
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener()
@@ -63,23 +61,33 @@ public class AllTasksActivity extends AppCompatActivity {
 
         TaskListRecyclerView.setAdapter(adapter);
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        selectedTeam = sharedPreferences.getString(SettingsActivity.TEAM_TAG, "");
+
+        queryTasks();
+
+    }
+
+    private void queryTasks() {
         Amplify.API.query(
                 ModelQuery.list(Task.class),
-                success ->
-                {
+                success -> {
                     Log.i(TAG, "Read Task successfully");
                     tasks.clear();
-                    for (Task databaseTask : success.getData()){
-                        tasks.add(databaseTask);
+                    for (Task databaseTask : success.getData()) {
+                        // Check if the task belongs to the selected team
+                        if (databaseTask.getTeamTask() != null && databaseTask.getTeamTask().getName().equals(selectedTeam)) {
+                            tasks.add(databaseTask);
+                        }
                     }
-                    runOnUiThread(() ->{
+                    runOnUiThread(() -> {
                         adapter.notifyDataSetChanged();
                     });
                 },
                 failure -> Log.i(TAG, "Couldn't read tasks from DynamoDB ")
         );
-
     }
+
 
     @Override
     protected void onResume() {
