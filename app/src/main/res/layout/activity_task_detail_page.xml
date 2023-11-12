@@ -9,6 +9,22 @@
 
 
     <TextView
+        android:id="@+id/TeamTextView"
+        android:layout_width="161dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        android:text="Team"
+        android:textColor="#910B0B"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/TaskDetailDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.739" />
+
+    <TextView
         android:id="@+id/textView4"
         android:layout_width="409dp"
         android:layout_height="65dp"
@@ -80,7 +96,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.67"
+        app:layout_constraintVertical_bias="0.835"
         tools:ignore="MissingConstraints" />
 
     <TextView
