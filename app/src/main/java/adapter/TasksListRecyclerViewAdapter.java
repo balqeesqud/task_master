@@ -1,5 +1,7 @@
 package adapter;
 
+import static com.example.taskmaster.MainActivity.TASK_ID_TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import com.example.taskmaster.R;
 
 import java.util.List;
 
+import activity.EditTaskActivity;
 import activity.TaskDetailActivity;
 
 
@@ -37,7 +40,7 @@ public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksList
 
     @Override
     public void onBindViewHolder(@NonNull TaskListViewHolder holder, int position) {
-
+        Task task = TaskList.get(position);
         TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.taskFragmentTextView);
         String taskName = TaskList.get(position).getTitle();
         String taskState = TaskList.get(position).getTaskState().name();
@@ -48,12 +51,12 @@ public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksList
 
         View taskViewHolder = holder.itemView;
         taskViewHolder.setOnClickListener(view -> {
-            Intent taskDetailIntent = new Intent(MainActivity, TaskDetailActivity.class);
+            Intent taskDetailIntent = new Intent(MainActivity, EditTaskActivity.class);
             taskDetailIntent.putExtra("taskTitle", taskName);
             taskDetailIntent.putExtra("taskState", taskState);
             taskDetailIntent.putExtra("Description", taskBody);
             taskDetailIntent.putExtra("Team", taskTeam);
-
+            taskDetailIntent.putExtra(TASK_ID_TAG, task.getId());
             MainActivity.startActivity(taskDetailIntent);
         });
     }

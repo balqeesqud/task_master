@@ -34,6 +34,9 @@ import com.amplifyframework.datastore.generated.model.Team;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TASK_TITLE_TAG = "taskName";
+
+    public static final String TASK_ID_TAG = "Task ID";
     private static final String USERNAME_TAG = "username";
     public static final String DATABASE_NAME = "task_master";
     private String username;
@@ -175,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         taskDetailIntent.putExtra("taskTitle", taskTitle);
         taskDetailIntent.putExtra("Description", task.getBody());
         taskDetailIntent.putExtra("taskState", task.getTaskState().toString());
-        taskDetailIntent.putExtra("TeamTasks", task.getTeamTask().toString());
+        taskDetailIntent.putExtra("Team", task.getTeamTask().toString());
 
         startActivity(taskDetailIntent);
     }
