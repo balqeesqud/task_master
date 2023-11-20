@@ -22,7 +22,6 @@
             android:exported="false" />
         <activity
             android:name="activity.SignupActivity"
-            android:name="activity.EditTaskActivity"
             android:exported="false" />
         <activity
             android:name="activity.SettingsActivity"
