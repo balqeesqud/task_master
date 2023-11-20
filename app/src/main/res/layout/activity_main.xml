@@ -95,8 +95,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:backgroundTint="#BA0F0F"
-        android:text="@string/add_task"
         android:textColor="#F9F5F8"
+        android:text="@string/add_task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -118,57 +118,31 @@
         app:layout_constraintVertical_bias="0.641"
         tools:ignore="MissingConstraints" />
 
-<!--    <Button-->
-<!--        android:id="@+id/taskButton3"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/AllTaskButton"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:backgroundTint="#B80F0F"-->
-<!--        android:text="@string/task_3"-->
-<!--        android:textColor="#F9F5F8"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/taskButton2"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/AllTaskButton" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/taskButton2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/AllTaskButton"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:backgroundTint="#B80F0F"-->
-<!--        android:text="@string/task_2"-->
-<!--        android:textColor="#F9F5F8"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/taskButton3"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/taskButton1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/AllTaskButton" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/taskButton1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/AllTaskButton"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:backgroundTint="#B80F0F"-->
-<!--        android:text="@string/task_1"-->
-<!--        android:textColor="#F9F5F8"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/taskButton2"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/AllTaskButton" />-->
-
     <ImageButton
         android:id="@+id/settingsImageButton"
         android:layout_width="45dp"
         android:layout_height="41dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:background="@color/white"
         android:backgroundTint="#9C3945"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintHorizontal_bias="0.803"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_manage" />
+
+    <ImageButton
+        android:id="@+id/settingsImageButton2"
+        android:layout_width="45dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:backgroundTint="#9C3945"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/TaskListRecyclerView"
@@ -181,5 +155,25 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.584"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/taskmasterLoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Log in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/taskmasterLogoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Log out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

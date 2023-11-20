@@ -103,6 +103,17 @@ Here's what users can do on the Task Detail page:
 - View Task Description: Below the task title, they can read a detailed description of the 
   selected task. 
 
+### User Authentication
+
+- Integrated Amazon Cognito for user authentication.
+- Implemented user sign-up and login flows using Cognito's pre-built UI.
+- Displayed the logged-in user's username or nickname in relevant parts of the application.
+
+### User Logout
+
+- Added functionality to allow users to log out of the application.
+
+
 ![Task Details ](screenshots/Taskdetail2.jpeg)
 
 
