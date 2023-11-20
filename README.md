@@ -117,5 +117,15 @@ Here's what users can do on the Task Detail page:
 ![Task Details ](screenshots/Taskdetail2.jpeg)
 
 
+### Edit Task
+
+This Activity shows the Task Details, that user pressed on, and can update it any/ all of it's 
+details, or delete it. 
+
+![Edit Task ](screenshots/EditTaskActivity.jpeg)
+
+
+
+
 
 
