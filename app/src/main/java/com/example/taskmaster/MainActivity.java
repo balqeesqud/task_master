@@ -14,9 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
+import com.amplifyframework.auth.AuthUserAttribute;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 
@@ -25,6 +30,7 @@ import java.util.List;
 
 import activity.AddTaskActivity;
 import activity.AllTasksActivity;
+import activity.LoginActivity;
 import activity.SettingsActivity;
 import activity.TaskDetailActivity;
 import adapter.TasksListRecyclerViewAdapter;
@@ -50,23 +56,114 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
+
+//        Amplify.Auth.signUp("balqeesalqudah97@gmail.com",
+//                "Balqees123",
+//                AuthSignUpOptions.builder()
+//                        .userAttribute(AuthUserAttributeKey.email(), "balqeesalqudah97@gmail.com")
+//                        .userAttribute(AuthUserAttributeKey.nickname(), "Blq")
+//                        .build(),
+//                good ->
+//                {
+//                    Log.i(TAG, "Signup succeeded: "+ good.toString());
+//                },
+//                bad ->
+//                {
+//                    Log.i(TAG, "Signup failed with username: "+ "balqeesalqudah97@gmail.com"+ " with this message: "+ bad.toString());
+//                });
+//
+//        Amplify.Auth.confirmSignUp("balqeesalqudah97@gmail.com",
+//                "518354",
+//                success ->
+//                {
+//                    Log.i(TAG,"verification succeeded: "+ success.toString());
+//
+//                },
+//                failure ->
+//                {
+//                    Log.i(TAG,"verification failed: "+ failure.toString());
+//                }
+//        );
+
+//          Amplify.Auth.signIn("balqeesalqudah97@gmail.com",
+//                "Balqees123",
+//                success ->
+//                {
+//                    Log.i(TAG, "Login succeeded: "+success.toString());
+//                },
+//                failure ->
+//                {
+//                    Log.i(TAG, "Login failed: "+failure.toString());
+//                }
+//        );
+
+//        Amplify.Auth.signOut(
+//                () ->
+//                {
+//                    Log.i(TAG,"Logout succeeded");
+//                },
+//                failure ->
+//                {
+//                    Log.i(TAG, "Logout failed");
+//                }
+//        );
+
         setUpAddTaskButton();
         createTeams();
         queryTasks();
+        setUpLoginAndLogoutButton();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        username = sharedPreferences.getString(USERNAME_TAG, "");
-        selectedTeam = sharedPreferences.getString(SettingsActivity.TEAM_TAG, "");
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        username = sharedPreferences.getString(USERNAME_TAG, "");
+//        selectedTeam = sharedPreferences.getString(SettingsActivity.TEAM_TAG, "");
 
-        if (username != null) {
-            TextView usernameTextView = findViewById(R.id.usernameTextView);
-            usernameTextView.setText(username + "'s tasks");
+        AuthUser authUser = Amplify.Auth.getCurrentUser();
+        String username="";
+        if (authUser == null){
+            Button loginButton = (Button) findViewById(R.id.taskmasterLoginButton);
+            loginButton.setVisibility(View.VISIBLE);
+            Button logoutButton = (Button) findViewById(R.id.taskmasterLogoutButton);
+            logoutButton.setVisibility(View.INVISIBLE);
+        }else{
+            username = authUser.getUsername();
+            Log.i(TAG, "Username is: "+ username);
+            Button loginButton = (Button) findViewById(R.id.taskmasterLoginButton);
+            loginButton.setVisibility(View.INVISIBLE);
+            Button logoutButton = (Button) findViewById(R.id.taskmasterLogoutButton);
+            logoutButton.setVisibility(View.VISIBLE);
+
+            String username2 = username;
+            Amplify.Auth.fetchUserAttributes(
+                    success ->
+                    {
+                        Log.i(TAG, "Fetch user attributes succeeded for username: "+username2);
+                        for (AuthUserAttribute userAttribute: success){
+                            if(userAttribute.getKey().getKeyString().equals("email")){
+                                String userEmail = userAttribute.getValue();
+                                runOnUiThread(() ->
+                                {
+                                    ((TextView)findViewById(R.id.usernameTextView)).setText(userEmail);
+                                });
+                            }
+                        }
+                    },
+                    failure ->
+                    {
+                        Log.i(TAG, "Fetch user attributes failed: "+failure.toString());
+                    }
+            );
         }
+
+
+//        if (username != null) {
+//            TextView usernameTextView = findViewById(R.id.usernameTextView);
+//            usernameTextView.setText(username + "'s tasks");
+//        }
 
         queryTasks();
     }
@@ -157,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +263,39 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setUpLoginAndLogoutButton(){
+        Button loginButton = (Button) findViewById(R.id.taskmasterLoginButton);
+        loginButton.setOnClickListener(v ->
+        {
+            Intent goToLogInIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(goToLogInIntent);
+        });
+
+        Button logoutButton = (Button) findViewById(R.id.taskmasterLogoutButton);
+        logoutButton.setOnClickListener(v->
+        {
+            Amplify.Auth.signOut(
+                    () ->
+                    {
+                        Log.i(TAG,"Logout succeeded");
+                        runOnUiThread(() ->
+                        {
+                            ((TextView)findViewById(R.id.usernameTextView)).setText("");
+                        });
+                        Intent goToLogInIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(goToLogInIntent);
+                    },
+                    failure ->
+                    {
+                        Log.i(TAG, "Logout failed");
+                        runOnUiThread(() ->
+                        {
+                            Toast.makeText(MainActivity.this, "Log out failed", Toast.LENGTH_LONG);
+                        });
+                    }
+            );
+        });
+    }
 
 
 

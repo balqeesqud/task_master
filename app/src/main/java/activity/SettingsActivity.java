@@ -27,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public static final String TEAM_TAG = "team";
     SharedPreferences sharedPreferences;
-    private static final String USERNAME_TAG = "username";
+    static final String USERNAME_TAG = "username";
 
 
     TextView displayUsernameTextView;
@@ -93,7 +93,6 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("SettingsActivity", "onResume called");
-
         String usernameString = sharedPreferences.getString(SettingsActivity.USERNAME_TAG, "No username found");
         String teamString = sharedPreferences.getString(SettingsActivity.TEAM_TAG, "No team found");
 
@@ -102,7 +101,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         TextView currentUsernameTextView = findViewById(R.id.CurrentUsernameTextView);
         currentUsernameTextView.setText(getString(R.string.current_username, usernameString));
-
         // Set the selected team in the Spinner
         setSpinnerToValue(teamSpinner, teamString);
 
