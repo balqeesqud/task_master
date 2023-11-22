@@ -40,25 +40,26 @@ public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksList
 
     @Override
     public void onBindViewHolder(@NonNull TaskListViewHolder holder, int position) {
-        Task task = TaskList.get(position);
-        TextView taskFragmentTextView = (TextView) holder.itemView.findViewById(R.id.taskFragmentTextView);
-        String taskName = TaskList.get(position).getTitle();
-        String taskState = TaskList.get(position).getTaskState().name();
-        String taskBody = TaskList.get(position).getBody();
-        String taskTeam= String.valueOf(TaskList.get(position).getTeamTask());///////////
-        taskFragmentTextView.setText(taskName);
+        if (TaskList != null && position >= 0 && position < TaskList.size()) {
+            Task task = TaskList.get(position);
+            TextView taskFragmentTextView = holder.itemView.findViewById(R.id.taskFragmentTextView);
+            String taskName = task.getTitle();
+            String taskState = task.getTaskState().name();
+            String taskBody = task.getBody();
+            String taskTeam = String.valueOf(task.getTeamTask());
 
+            taskFragmentTextView.setText(taskName);
 
-        View taskViewHolder = holder.itemView;
-        taskViewHolder.setOnClickListener(view -> {
-            Intent taskDetailIntent = new Intent(MainActivity, EditTaskActivity.class);
-            taskDetailIntent.putExtra("taskTitle", taskName);
-            taskDetailIntent.putExtra("taskState", taskState);
-            taskDetailIntent.putExtra("Description", taskBody);
-            taskDetailIntent.putExtra("Team", taskTeam);
-            taskDetailIntent.putExtra(TASK_ID_TAG, task.getId());
-            MainActivity.startActivity(taskDetailIntent);
-        });
+            holder.itemView.setOnClickListener(view -> {
+                Intent taskDetailIntent = new Intent(MainActivity, EditTaskActivity.class);
+                taskDetailIntent.putExtra("taskTitle", taskName);
+                taskDetailIntent.putExtra("taskState", taskState);
+                taskDetailIntent.putExtra("Description", taskBody);
+                taskDetailIntent.putExtra("Team", taskTeam);
+                taskDetailIntent.putExtra(TASK_ID_TAG, task.getId());
+                MainActivity.startActivity(taskDetailIntent);
+            });
+        }
     }
 
 
