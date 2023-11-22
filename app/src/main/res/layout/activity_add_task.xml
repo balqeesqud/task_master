@@ -42,40 +42,40 @@
 
     <Spinner
         android:id="@+id/addTaskStateSpinner"
-        android:layout_width="319dp"
-        android:layout_height="45dp"
+        android:layout_width="339dp"
+        android:layout_height="42dp"
         android:background="#D1A4A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintHorizontal_bias="0.271"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TaskStatusTextView"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.053" />
 
     <Spinner
         android:id="@+id/addTaskTeamSpinner"
-        android:layout_width="319dp"
-        android:layout_height="45dp"
+        android:layout_width="336dp"
+        android:layout_height="46dp"
         android:background="#D1A4A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintHorizontal_bias="0.268"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/taskTeamTextView"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/TaskStatusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
+        android:layout_marginTop="136dp"
         android:background="#EAE3E3"
         android:backgroundTint="#EAE3E3"
         android:text="Status"
         android:textColor="#BA0F0F"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
@@ -84,14 +84,14 @@
         android:id="@+id/taskTeamTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="388dp"
+        android:layout_marginTop="248dp"
         android:background="#EAE3E3"
         android:backgroundTint="#EAE3E3"
         android:text="Team"
         android:textColor="#BA0F0F"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
@@ -100,15 +100,15 @@
         android:id="@+id/taskTileEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="text"
         android:text="My Task"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintHorizontal_bias="0.776"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskTileText"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -123,45 +123,12 @@
         android:textColor="#C64D4D"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/taskDescriptionEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#8A8787"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Do Something"
-        android:textColor="@color/black"
-        android:textColorHint="#878787"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescriptionText"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/taskDescriptionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:background="#EAE3E3"
-        android:backgroundTint="#EAE3E3"
-        android:text="Task Description"
-        android:textColor="#BA0F0F"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="MissingConstraints" />
-
-<!--    <Button-->
+    <!--    <Button-->
 <!--        android:id="@+id/SubmitAddTask"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
@@ -174,6 +141,39 @@
 <!--        app:layout_constraintTop_toTopOf="parent"-->
 <!--        app:layout_constraintVertical_bias="0.859"-->
 <!--        tools:ignore="MissingConstraints" />-->
+
+    <EditText
+        android:id="@+id/taskDescriptionEditText"
+        android:layout_width="204dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#8A8787"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Do Something"
+        android:textColor="@color/black"
+        android:textColorHint="#878787"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskTileEditText"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/taskDescriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:background="#EAE3E3"
+        android:backgroundTint="#EAE3E3"
+        android:text="Task Description"
+        android:textColor="#BA0F0F"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/submittedLabel"
@@ -203,8 +203,8 @@
 
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="33dp"
-        android:layout_height="20dp"
+        android:layout_width="63dp"
+        android:layout_height="29dp"
         android:layout_marginTop="19dp"
         android:layout_marginBottom="14dp"
         android:adjustViewBounds="false"
@@ -226,14 +226,58 @@
         android:id="@+id/saveTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="196dp"
         android:backgroundTint="#BA0F0F"
         android:text="@string/save"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addTaskTeamSpinner" />
+
+    <ImageView
+        android:id="@+id/addTaskImageView"
+        android:layout_width="134dp"
+        android:layout_height="135dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="84dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskTeamSpinner"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/addTaskDeleteImageButton"
+        android:layout_width="129dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="84dp"
+        android:text="Delete Image"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addTaskImageView"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskTeamSpinner"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/addTaskAddImageButton"
+        android:layout_width="131dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
+        android:text="Add Image"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintStart_toEndOf="@+id/addTaskImageView"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskTeamSpinner"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

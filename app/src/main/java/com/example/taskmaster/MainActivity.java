@@ -25,6 +25,11 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +41,7 @@ import activity.TaskDetailActivity;
 import adapter.TasksListRecyclerViewAdapter;
 
 import com.amplifyframework.datastore.generated.model.Team;
+import com.bumptech.glide.Glide;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
     private String selectedTeam;
     public static final String TEAM_TAG = "team";
 
+    public static final String TASK_TITLE_EXTRA = "taskTitle";
+    public static final String TASK_STATE_EXTRA = "taskState";
+    public static final String DESCRIPTION_EXTRA = "Description";
+    public static final String TEAM_EXTRA = "Team";
+    public static final String TASK_ID_EXTRA = TASK_ID_TAG;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,56 +72,33 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-//        Amplify.Auth.signUp("balqeesalqudah97@gmail.com",
-//                "Balqees123",
-//                AuthSignUpOptions.builder()
-//                        .userAttribute(AuthUserAttributeKey.email(), "balqeesalqudah97@gmail.com")
-//                        .userAttribute(AuthUserAttributeKey.nickname(), "Blq")
-//                        .build(),
-//                good ->
-//                {
-//                    Log.i(TAG, "Signup succeeded: "+ good.toString());
-//                },
-//                bad ->
-//                {
-//                    Log.i(TAG, "Signup failed with username: "+ "balqeesalqudah97@gmail.com"+ " with this message: "+ bad.toString());
-//                });
-//
-//        Amplify.Auth.confirmSignUp("balqeesalqudah97@gmail.com",
-//                "518354",
-//                success ->
-//                {
-//                    Log.i(TAG,"verification succeeded: "+ success.toString());
-//
-//                },
-//                failure ->
-//                {
-//                    Log.i(TAG,"verification failed: "+ failure.toString());
-//                }
-//        );
 
-//          Amplify.Auth.signIn("balqeesalqudah97@gmail.com",
-//                "Balqees123",
-//                success ->
-//                {
-//                    Log.i(TAG, "Login succeeded: "+success.toString());
-//                },
-//                failure ->
-//                {
-//                    Log.i(TAG, "Login failed: "+failure.toString());
-//                }
-//        );
+        String emptyFilename= "emptyTestFileName";
+        File emptyFile = new File(getApplicationContext().getFilesDir(), emptyFilename);
 
-//        Amplify.Auth.signOut(
-//                () ->
-//                {
-//                    Log.i(TAG,"Logout succeeded");
-//                },
-//                failure ->
-//                {
-//                    Log.i(TAG, "Logout failed");
-//                }
-//        );
+        try {
+            BufferedWriter emptyFileBufferedWriter= new BufferedWriter(new FileWriter(emptyFile));
+
+            emptyFileBufferedWriter.append("Balqees AlQudah\nHello Welcome ");
+            emptyFileBufferedWriter.close();
+
+        }catch (IOException ioe){
+            Log.i(TAG, "could not write locally with filename: "+ emptyFilename);
+        }
+
+        String emptyFileS3Key = "TaskMasterTest.txt";
+        Amplify.Storage.uploadFile(
+                emptyFileS3Key,
+                emptyFile,
+                success ->
+                {
+                    Log.i(TAG, "S3 upload succeeded and the Key is: " + success.getKey());
+                },
+                failure ->
+                {
+                    Log.i(TAG, "S3 upload failed! " + failure.getMessage());
+                }
+        );
 
         setUpAddTaskButton();
         createTeams();
@@ -118,49 +107,51 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        username = sharedPreferences.getString(USERNAME_TAG, "");
-//        selectedTeam = sharedPreferences.getString(SettingsActivity.TEAM_TAG, "");
 
         AuthUser authUser = Amplify.Auth.getCurrentUser();
-        String username="";
-        if (authUser == null){
-            Button loginButton = (Button) findViewById(R.id.taskmasterLoginButton);
+        String username = "";
+        if (authUser == null) {
+            Button loginButton = findViewById(R.id.taskmasterLoginButton);
             loginButton.setVisibility(View.VISIBLE);
-            Button logoutButton = (Button) findViewById(R.id.taskmasterLogoutButton);
+            Button logoutButton = findViewById(R.id.taskmasterLogoutButton);
             logoutButton.setVisibility(View.INVISIBLE);
-        }else{
+        } else {
             username = authUser.getUsername();
-            Log.i(TAG, "Username is: "+ username);
-            Button loginButton = (Button) findViewById(R.id.taskmasterLoginButton);
+            Log.i(TAG, "Username is: " + username);
+            Button loginButton = findViewById(R.id.taskmasterLoginButton);
             loginButton.setVisibility(View.INVISIBLE);
-            Button logoutButton = (Button) findViewById(R.id.taskmasterLogoutButton);
+            Button logoutButton = findViewById(R.id.taskmasterLogoutButton);
             logoutButton.setVisibility(View.VISIBLE);
 
-            String username2 = username;
+            String finalUsername = username;
             Amplify.Auth.fetchUserAttributes(
-                    success ->
-                    {
-                        Log.i(TAG, "Fetch user attributes succeeded for username: "+username2);
-                        for (AuthUserAttribute userAttribute: success){
-                            if(userAttribute.getKey().getKeyString().equals("email")){
+                    success -> {
+                        Log.i(TAG, "Fetch user attributes succeeded for username: " + finalUsername);
+                        for (AuthUserAttribute userAttribute : success) {
+                            if (userAttribute.getKey().getKeyString().equals("email")) {
                                 String userEmail = userAttribute.getValue();
-                                runOnUiThread(() ->
-                                {
-                                    ((TextView)findViewById(R.id.usernameTextView)).setText(userEmail);
+                                runOnUiThread(() -> {
+                                    ((TextView) findViewById(R.id.usernameTextView)).setText(userEmail);
                                 });
                             }
                         }
                     },
-                    failure ->
-                    {
-                        Log.i(TAG, "Fetch user attributes failed: "+failure.toString());
+                    failure -> {
+                        Log.i(TAG, "Fetch user attributes failed: " + failure.toString());
                     }
             );
+
+            selectedTeam = "Amayreh";
         }
+
+        // Query tasks after setting the selectedTeam
+        queryTasks();
+    }
+
 
 
 //        if (username != null) {
@@ -168,8 +159,7 @@ public class MainActivity extends AppCompatActivity {
 //            usernameTextView.setText(username + "'s tasks");
 //        }
 
-        queryTasks();
-    }
+
 
     private void createTeams() {
         // Check if teams already exist before creating them
@@ -213,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "Read Task successfully");
                     tasks.clear();
                     for (Task databaseTask : success.getData()) {
+                        // Check if the task belongs to the selected team
                         Team teamTask = databaseTask.getTeamTask();
                         if (teamTask != null && teamTask.getName().equals(selectedTeam)) {
                             tasks.add(databaseTask);
@@ -222,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     });
                 },
-                failure -> Log.i(TAG, "Couldn't read tasks from DynamoDB ")
+                failure -> Log.i(TAG, "Couldn't read tasks from DynamoDB: " + failure.toString())
         );
     }
 
@@ -304,6 +295,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void openTaskDetail(String taskTitle, Task task) {
         Intent taskDetailIntent = new Intent(MainActivity.this, TaskDetailActivity.class);
+
+        taskDetailIntent.putExtra(TASK_ID_EXTRA, task.getId());
         taskDetailIntent.putExtra("taskTitle", taskTitle);
         taskDetailIntent.putExtra("Description", task.getBody());
         taskDetailIntent.putExtra("taskState", task.getTaskState().toString());

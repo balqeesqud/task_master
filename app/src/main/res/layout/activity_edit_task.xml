@@ -8,6 +8,44 @@
     android:background="#939192"
     tools:context="activity.EditTaskActivity">
 
+    <ImageView
+        android:id="@+id/editTaskImageImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamTaskTextView"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/editTaskDeleteImageButton"
+        android:layout_width="122dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="100dp"
+        android:text="Delete Image"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editTaskImageImageView"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskTeamSpinner"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/editTaskAddImageButton"
+        android:layout_width="119dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="46dp"
+        android:text="Add Image"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/editTaskImageImageView"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskTeamSpinner"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/EditTaskPage"
@@ -47,52 +85,12 @@
         app:srcCompat="@android:drawable/ic_menu_revert"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/EditTaskTitleTextView"
-        android:layout_width="102dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="60dp"
-        android:text="Task title"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTaskPage"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editTaskTitleEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="Type a name"
-        android:inputType="text"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toEndOf="@+id/EditTaskTitleTextView"
-        app:layout_constraintTop_toBottomOf="@+id/EditTaskPage"
-        tools:ignore="MissingConstraints" />
-
-    <Spinner
-        android:id="@+id/editTaskStatusSpinner"
-        android:layout_width="217dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.743"
-        app:layout_constraintStart_toEndOf="@+id/taskStatusTextView"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskDescriptionEditText"
-        tools:ignore="MissingConstraints" />
-
     <Button
         android:id="@+id/editTaskSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="532dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="580dp"
         android:backgroundTint="#BA0F0F"
         android:text="@string/save"
         android:textColor="#FFFFFF"
@@ -104,66 +102,40 @@
         android:id="@+id/editTaskDescriptionEditText"
         android:layout_width="215dp"
         android:layout_height="45dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
         android:hint="Type a description"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toEndOf="@+id/EditTaskDescriptionTextView"
         app:layout_constraintTop_toBottomOf="@+id/editTaskTitleEditText"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/EditTaskDescriptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="Description"
+        android:id="@+id/EditTaskTitleTextView"
+        android:layout_width="102dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:text="Task title"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/taskStatusTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTaskTitleTextView"
-        app:layout_constraintVertical_bias="0.639"
+        app:layout_constraintTop_toBottomOf="@+id/EditTaskPage"
         tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/editTaskDeleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="532dp"
-        android:backgroundTint="#BA0F0F"
-        android:text="Delete Task"
-        android:textColor="#FFFFFF"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toEndOf="@+id/editTaskSaveButton"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Spinner
-        android:id="@+id/editTaskTeamSpinner"
-        android:layout_width="218dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/teamTaskTextView"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskStatusSpinner" />
 
     <TextView
         android:id="@+id/taskStatusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="200dp"
         android:text="Status"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EditTaskPage"
         tools:ignore="MissingConstraints" />
@@ -172,13 +144,80 @@
         android:id="@+id/teamTaskTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:text="Team"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskStatusTextView" />
+
+    <EditText
+        android:id="@+id/editTaskTitleEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Type a name"
+        android:inputType="text"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toEndOf="@+id/EditTaskTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/EditTaskPage"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/editTaskTeamSpinner"
+        android:layout_width="218dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/teamTaskTextView"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskStatusSpinner" />
+
+    <Spinner
+        android:id="@+id/editTaskStatusSpinner"
+        android:layout_width="217dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toEndOf="@+id/taskStatusTextView"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskDescriptionEditText"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/EditTaskDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Description"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/taskStatusTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditTaskTitleTextView"
+        app:layout_constraintVertical_bias="0.647"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/editTaskDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#BA0F0F"
+        android:text="Delete Task"
+        android:textColor="#FFFFFF"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toEndOf="@+id/editTaskSaveButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.955"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
