@@ -46,17 +46,20 @@ public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksList
             String taskName = task.getTitle();
             String taskState = task.getTaskState().name();
             String taskBody = task.getBody();
-            String taskTeam = String.valueOf(task.getTeamTask());
+            String taskTeam = task.getTeamTask().getName();
+            String taskImage = task.getTaskImageS3Key();
+
 
             taskFragmentTextView.setText(taskName);
 
             holder.itemView.setOnClickListener(view -> {
-                Intent taskDetailIntent = new Intent(MainActivity, EditTaskActivity.class);
+                Intent taskDetailIntent = new Intent(MainActivity, TaskDetailActivity.class);
                 taskDetailIntent.putExtra("taskTitle", taskName);
                 taskDetailIntent.putExtra("taskState", taskState);
                 taskDetailIntent.putExtra("Description", taskBody);
                 taskDetailIntent.putExtra("Team", taskTeam);
                 taskDetailIntent.putExtra(TASK_ID_TAG, task.getId());
+                taskDetailIntent.putExtra("taskImage", taskImage);
                 MainActivity.startActivity(taskDetailIntent);
             });
         }

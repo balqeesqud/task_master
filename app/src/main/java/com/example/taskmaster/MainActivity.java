@@ -41,6 +41,7 @@ import activity.TaskDetailActivity;
 import adapter.TasksListRecyclerViewAdapter;
 
 import com.amplifyframework.datastore.generated.model.Team;
+import com.bumptech.glide.Glide;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -71,56 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-//        Amplify.Auth.signUp("balqeesalqudah97@gmail.com",
-//                "Balqees123",
-//                AuthSignUpOptions.builder()
-//                        .userAttribute(AuthUserAttributeKey.email(), "balqeesalqudah97@gmail.com")
-//                        .userAttribute(AuthUserAttributeKey.nickname(), "Blq")
-//                        .build(),
-//                good ->
-//                {
-//                    Log.i(TAG, "Signup succeeded: "+ good.toString());
-//                },
-//                bad ->
-//                {
-//                    Log.i(TAG, "Signup failed with username: "+ "balqeesalqudah97@gmail.com"+ " with this message: "+ bad.toString());
-//                });
-//
-//        Amplify.Auth.confirmSignUp("balqeesalqudah97@gmail.com",
-//                "518354",
-//                success ->
-//                {
-//                    Log.i(TAG,"verification succeeded: "+ success.toString());
-//
-//                },
-//                failure ->
-//                {
-//                    Log.i(TAG,"verification failed: "+ failure.toString());
-//                }
-//        );
-
-//          Amplify.Auth.signIn("balqeesalqudah97@gmail.com",
-//                "Balqees123",
-//                success ->
-//                {
-//                    Log.i(TAG, "Login succeeded: "+success.toString());
-//                },
-//                failure ->
-//                {
-//                    Log.i(TAG, "Login failed: "+failure.toString());
-//                }
-//        );
-
-//        Amplify.Auth.signOut(
-//                () ->
-//                {
-//                    Log.i(TAG,"Logout succeeded");
-//                },
-//                failure ->
-//                {
-//                    Log.i(TAG, "Logout failed");
-//                }
-//        );
 
         String emptyFilename= "emptyTestFileName";
         File emptyFile = new File(getApplicationContext().getFilesDir(), emptyFilename);
@@ -164,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         String username = "";
         if (authUser == null) {
-            // Handle the case when the user is not authenticated
             Button loginButton = findViewById(R.id.taskmasterLoginButton);
             loginButton.setVisibility(View.VISIBLE);
             Button logoutButton = findViewById(R.id.taskmasterLogoutButton);
@@ -177,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             Button logoutButton = findViewById(R.id.taskmasterLogoutButton);
             logoutButton.setVisibility(View.VISIBLE);
 
-            // Fetch user attributes
             String finalUsername = username;
             Amplify.Auth.fetchUserAttributes(
                     success -> {

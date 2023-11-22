@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -72,6 +73,15 @@ public class AddTaskActivity extends AppCompatActivity {
 
         teamFuture = new CompletableFuture<>();
         activityResultLauncher = getImagePickingActivityResultLauncher();
+
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener()
+
+        {
+            public void onClick (View view){
+                onBackPressed();
+            }
+        });
 
         setUpSpinner();
         setUpSaveButton();
