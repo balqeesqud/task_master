@@ -223,7 +223,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 success ->
                 {
                     Log.i(TAG, "Succeeded in getting file uploaded to S3! Key is: " + success.getKey());
-                    s3ImageKey = success.getKey(); // Replace success.getKey() with the actual method to get the S3 key
+                    s3ImageKey = success.getKey();
 //                    saveButton(s3ImageKey);
                     updateImageButtons();
                     ImageView productImageView = findViewById(R.id.addTaskImageView);
@@ -317,22 +317,57 @@ public class AddTaskActivity extends AppCompatActivity {
         return result;
     }
 
-    private int getSpinnerIndex(Spinner spinner, String stringValueToCheck){
-        for (int i = 0;i < spinner.getCount(); i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(stringValueToCheck)){
-                return i;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent callingIntent = getIntent();
+
+        // Task Title , and Description
+        if (callingIntent != null) {
+            if (callingIntent.getType() != null && callingIntent.getType().equals("text/plain")) {
+                handleTextIntent(callingIntent);
+            }
+            // Task Image
+            if (callingIntent.getType() != null && callingIntent.getType().startsWith("image")) {
+                handleImageIntent(callingIntent);
             }
         }
-
-        return 0;
     }
 
-       public static TaskState taskStateFromString(String inputProductCategoryText) {
-        for (TaskState taskState : TaskState.values()) {
-            if (taskState.toString().equals(inputProductCategoryText)) {
-                return taskState;
+    private void handleTextIntent(Intent intent) {
+        String callingText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (callingText != null) {
+            String cleanedText = cleanText(callingText);
+            ((EditText) findViewById(R.id.taskTileEditText)).setText(cleanedText);
+            ((EditText) findViewById(R.id.taskDescriptionEditText)).setText(cleanedText);
+        }
+    }
+
+    private void handleImageIntent(Intent intent) {
+        Uri incomingImageFileUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+        if (incomingImageFileUri != null) {
+            try {
+                InputStream incomingImageFileInputStream = getContentResolver().openInputStream(incomingImageFileUri);
+                ImageView taskImageView = findViewById(R.id.addTaskImageView);
+                Log.d(TAG, "Image URI: " + incomingImageFileUri);
+
+
+                if (taskImageView != null) {
+                    taskImageView.setImageBitmap(BitmapFactory.decodeStream(incomingImageFileInputStream));
+                } else {
+                    Log.e(TAG, "ImageView is null for some reason");
+                }
+            } catch (FileNotFoundException fnfe) {
+                Log.e(TAG, "Could not get file stream from the URI " + fnfe.getMessage(), fnfe);
             }
         }
-        return null;
+    }
+
+
+    private String cleanText(String text) {
+        text = text.replaceAll("\\b(?:https?|ftp):\\/\\/\\S+\\b", ""); // remove links
+        text = text.replaceAll("\"", ""); // remove double quotation
+
+        return text;
     }
 }

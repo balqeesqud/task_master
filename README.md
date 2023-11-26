@@ -56,8 +56,21 @@ of this page are as follows:
 - **Save Task:** When the user clicks the "Save" button, a "Your Task was saved" label is
 displayed on the page to confirm that the task has been successfully saved.
 
+- Added intent filter in the manifest.
+- Created `onResume` to handle incoming intents like texts/images. 
 
 ![addTaskForm](screenshots/addTask5.jpeg)
+
+- Sharing a Text to Task Master App
+  ![addTaskForm](screenshots/googleText.jpeg)
+  ![addTaskForm](screenshots/TextSharedFromGoogle.jpeg)
+  ![addTaskForm](screenshots/AddDetailText.jpeg)
+
+
+- Sharing an Image to Task Master App
+  ![addTaskForm](screenshots/googleImage.jpeg)
+  ![addTaskForm](screenshots/shareImageFromGoogle.jpeg)
+  ![addTaskForm](screenshots/AddTaskImageAdded.jpeg)
 
 
 ### All Tasks

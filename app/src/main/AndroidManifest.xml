@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="activity.TaskAmplifyApp"
         android:allowBackup="true"
@@ -12,10 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Taskmaster"
-
         tools:targetApi="31">
-        <activity
 
+        <activity
             android:name="activity.LoginActivity"
             android:exported="false" />
         <activity
@@ -38,6 +39,7 @@
         <activity
             android:name="activity.EditTaskActivity"
             android:exported="false" />
+
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
@@ -53,10 +55,13 @@
         </activity>
         <activity
             android:name="activity.AddTaskActivity"
-            android:label="Add Task">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+            android:exported="true">
+            <intent-filter android:label="add text or image for a new task"> <!-- this is the text that shows up when the user is picking an app to handle the intent -->
+                <action android:name="android.intent.action.SEND" /> <!-- this will register our activity as being able to process this intent -->
+                <category android:name="android.intent.category.DEFAULT" /> <!-- this is needed for all implicit intents -->
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
         </activity>
         <activity
             android:name="activity.AllTasksActivity"
@@ -66,4 +71,5 @@
                 android:value=".MainActivity" />
         </activity>
     </application>
+
 </manifest>
