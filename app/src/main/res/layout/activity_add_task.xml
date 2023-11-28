@@ -11,6 +11,7 @@
     android:hapticFeedbackEnabled="false"
     tools:ignore="ExtraText">
 
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="416dp"
@@ -23,11 +24,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="0dp" />
-
+        tools:layout_editor_absoluteY="63dp" />
 
     <Spinner
         android:id="@+id/addTaskStateSpinner"

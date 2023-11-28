@@ -44,6 +44,8 @@ query GetTask($id: ID!) {
       updatedAt
       __typename
     }
+    TaskLongitude
+    TaskLatitude
     taskImageS3Key
     createdAt
     updatedAt
@@ -63,6 +65,8 @@ query ListTasks(
       body
       TaskState
       teamId
+      TaskLongitude
+      TaskLatitude
       taskImageS3Key
       createdAt
       updatedAt
@@ -127,6 +131,8 @@ query TasksByTeamIdAndTitle(
       body
       TaskState
       teamId
+      TaskLongitude
+      TaskLatitude
       taskImageS3Key
       createdAt
       updatedAt

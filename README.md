@@ -58,8 +58,13 @@ displayed on the page to confirm that the task has been successfully saved.
 
 - Added intent filter in the manifest.
 - Created `onResume` to handle incoming intents like texts/images. 
+- User will be asked Location Permission, and we will get the latitude and longitude to get the 
+  current location and display it in the Task Details Activity. 
+ 
 
-![addTaskForm](screenshots/addTask5.jpeg)
+![location permission](screenshots/locationPermission.jpeg)
+![task details](screenshots/taskWithLocation.jpeg)
+
 
 - Sharing a Text to Task Master App
   ![addTaskForm](screenshots/googleText.jpeg)
@@ -115,6 +120,12 @@ Here's what users can do on the Task Detail page:
 - View Task Title
 - View Task Description: Below the task title, they can read a detailed description of the 
   selected task. 
+- Displays Team Name. 
+- Displays and image uploaded by the user from his/her phone. 
+- Shows the location of the task. 
+
+![task details](screenshots/taskWithLocation.jpeg)
+
 
 ### User Authentication
 

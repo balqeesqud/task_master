@@ -47,6 +47,9 @@ public class TasksListRecyclerViewAdapter extends RecyclerView.Adapter<TasksList
             String taskState = task.getTaskState().name();
             String taskBody = task.getBody();
             String taskTeam = task.getTeamTask().getName();
+            String longitude = task.getTaskLongitude();
+            String latitude = task.getTaskLatitude();
+
             String taskImage = task.getTaskImageS3Key();
 
 
