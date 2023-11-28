@@ -16,6 +16,8 @@ type Task @model @auth(rules: [{ allow: public }]) {
 #  dateCreated: AWSDateTime!
   teamId:ID! @index (name:"byTeam", sortKeyFields:["title"])
   teamTask:Team @belongsTo(fields:["teamId"])
+  TaskLongitude:String
+  TaskLatitude:String
   taskImageS3Key: String
 }
 

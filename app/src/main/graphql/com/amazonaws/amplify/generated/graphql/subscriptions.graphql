@@ -47,6 +47,8 @@ subscription OnCreateTask($filter: ModelSubscriptionTaskFilterInput) {
       updatedAt
       __typename
     }
+    TaskLongitude
+    TaskLatitude
     taskImageS3Key
     createdAt
     updatedAt
@@ -68,6 +70,8 @@ subscription OnUpdateTask($filter: ModelSubscriptionTaskFilterInput) {
       updatedAt
       __typename
     }
+    TaskLongitude
+    TaskLatitude
     taskImageS3Key
     createdAt
     updatedAt
@@ -89,6 +93,8 @@ subscription OnDeleteTask($filter: ModelSubscriptionTaskFilterInput) {
       updatedAt
       __typename
     }
+    TaskLongitude
+    TaskLatitude
     taskImageS3Key
     createdAt
     updatedAt

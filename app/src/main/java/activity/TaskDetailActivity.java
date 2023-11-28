@@ -3,11 +3,16 @@ package activity;
 import static com.example.taskmaster.MainActivity.TAG;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,9 +31,16 @@ import com.bumptech.glide.Glide;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.example.taskmaster.MainActivity;
 import com.example.taskmaster.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -48,11 +60,47 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     ActivityResultLauncher<Intent> activityResultLauncher;
     private String s3ImageKey = "";
+    private TextView locationTextView;
+    static final int LOCATION_POLLING_INTERVAL = 5 * 1000;
+
+    FusedLocationProviderClient locationProviderClient = null;
+
+    Geocoder geocoder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail_page);
+        locationTextView = findViewById(R.id.taskLocationTextView);
+
+        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setInterval(LOCATION_POLLING_INTERVAL);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                try {
+                    String address = geocoder.getFromLocation(
+                                    locationResult.getLastLocation().getLatitude(),
+                                    locationResult.getLastLocation().getLongitude(),
+                                    1)
+                            .get(0)
+                            .getAddressLine(0);
+                    runOnUiThread(() -> {
+                        locationTextView.setText("Current Location: " + address);
+                    });
+                    Log.i(TAG, "Repeating current location is: " + address);
+                } catch (IOException ioe) {
+                    Log.e(TAG, "Could not get subscribed location: " + ioe.getMessage(), ioe);
+                }
+            }
+        };
+
+
 
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +150,48 @@ public class TaskDetailActivity extends AppCompatActivity {
         String taskImage = getIntent().getStringExtra("taskImage");
 
         Log.d("TaskDetailActivity", "Received taskState: " + taskBody);
+
+        geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setInterval(LOCATION_POLLING_INTERVAL);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+
+        locationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+        locationProviderClient.flushLocations();
+
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                try {
+                    String address = geocoder.getFromLocation(
+                                    locationResult.getLastLocation().getLatitude(),
+                                    locationResult.getLastLocation().getLongitude(),
+                                    1)
+                            .get(0)
+                            .getAddressLine(0);
+
+                    runOnUiThread(() -> {
+                        locationTextView.setText("Current Location: " + address);
+                    });
+
+                    Log.i(TAG, "Repeating current location is: " + address);
+                } catch (IOException ioe) {
+                    Log.e(TAG, "Could not get subscribed location: " + ioe.getMessage(), ioe);
+                }
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Request location permissions if not granted
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+
+        locationProviderClient.requestLocationUpdates(locationRequest, locationCallback, getMainLooper());
 
 
         if (taskTitle != null) {

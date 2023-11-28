@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.amplifyframework.datastore.generated.model.TaskStateEnum;
 import com.example.taskmaster.MainActivity;
 import com.example.taskmaster.R;
 
@@ -31,7 +32,6 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
 import com.amplifyframework.datastore.generated.model.Task;
-import com.amplifyframework.datastore.generated.model.TaskStateEnum;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
