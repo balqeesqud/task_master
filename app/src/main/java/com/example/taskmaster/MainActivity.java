@@ -20,13 +20,10 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.AuthUserAttribute;
-import com.amplifyframework.auth.AuthUserAttributeKey;
-import com.amplifyframework.auth.options.AuthSignOutOptions;
-import com.amplifyframework.auth.options.AuthSignUpOptions;
+
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Task;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -42,8 +39,6 @@ import activity.TaskDetailActivity;
 import adapter.TasksListRecyclerViewAdapter;
 
 import com.amplifyframework.datastore.generated.model.Team;
-import com.bumptech.glide.Glide;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,17 +69,17 @@ public class MainActivity extends AppCompatActivity {
         init();
 
 
-        String emptyFilename= "emptyTestFileName";
+        String emptyFilename = "emptyTestFileName";
         File emptyFile = new File(getApplicationContext().getFilesDir(), emptyFilename);
 
         try {
-            BufferedWriter emptyFileBufferedWriter= new BufferedWriter(new FileWriter(emptyFile));
+            BufferedWriter emptyFileBufferedWriter = new BufferedWriter(new FileWriter(emptyFile));
 
             emptyFileBufferedWriter.append("Balqees AlQudah\nHello Welcome ");
             emptyFileBufferedWriter.close();
 
-        }catch (IOException ioe){
-            Log.i(TAG, "could not write locally with filename: "+ emptyFilename);
+        } catch (IOException ioe) {
+            Log.i(TAG, "could not write locally with filename: " + emptyFilename);
         }
 
         String emptyFileS3Key = "TaskMasterTest.txt";
@@ -154,12 +149,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
 //        if (username != null) {
 //            TextView usernameTextView = findViewById(R.id.usernameTextView);
 //            usernameTextView.setText(username + "'s tasks");
 //        }
-
 
 
     private void createTeams() {
@@ -168,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         checkAndCreateTeam("Qudah");
         checkAndCreateTeam("Zarkani");
     }
+
     private boolean isEmpty(List<?> list) {
         return list == null || list.isEmpty();
     }
@@ -194,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e(TAG, "Error checking team existence", error)
         );
     }
-
 
 
     private void queryTasks() {
@@ -258,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpLoginAndLogoutButton(){
+    private void setUpLoginAndLogoutButton() {
         Button loginButton = (Button) findViewById(R.id.taskmasterLoginButton);
         loginButton.setOnClickListener(v ->
         {
@@ -266,32 +259,28 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goToLogInIntent);
         });
 
-        Button logoutButton = (Button) findViewById(R.id.taskmasterLogoutButton);
-        logoutButton.setOnClickListener(v->
-        {
+
+        Button logoutButton = findViewById(R.id.taskmasterLogoutButton);
+        logoutButton.setOnClickListener(v -> {
             Amplify.Auth.signOut(
-                    () ->
-                    {
-                        Log.i(TAG,"Logout succeeded");
-                        runOnUiThread(() ->
-                        {
-                            ((TextView)findViewById(R.id.usernameTextView)).setText("");
+
+                    () -> {
+                        Log.i(TAG, "Logout succeeded");
+                        runOnUiThread(() -> {
+                            ((TextView) findViewById(R.id.usernameTextView)).setText("");
                         });
                         Intent goToLogInIntent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(goToLogInIntent);
                     },
-                    failure ->
-                    {
+                    error -> {
                         Log.i(TAG, "Logout failed");
-                        runOnUiThread(() ->
-                        {
-                            Toast.makeText(MainActivity.this, "Log out failed", Toast.LENGTH_LONG);
+                        runOnUiThread(() -> {
+                            Toast.makeText(MainActivity.this, "Log out failed", Toast.LENGTH_LONG).show();
                         });
                     }
             );
         });
     }
-
 
 
     private void openTaskDetail(String taskTitle, Task task) {

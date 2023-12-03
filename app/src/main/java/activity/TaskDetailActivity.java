@@ -24,13 +24,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
-import com.bumptech.glide.Glide;
+
 
 import com.amplifyframework.datastore.generated.model.Task;
-import com.example.taskmaster.MainActivity;
+import com.bumptech.glide.Glide;
 import com.example.taskmaster.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -47,7 +46,6 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class TaskDetailActivity extends AppCompatActivity {
     private static final String USERNAME_TAG = "username";
@@ -104,7 +102,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         };
 
-
+        mp= new MediaPlayer();
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +110,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                 onBackPressed();
             }
 
-            Button editTaskButton = findViewById(R.id.taskDetailsButton);
+//            Button editTaskButton = findViewById(R.id.taskDetailsButton);
 
         });
 
@@ -149,32 +147,6 @@ public class TaskDetailActivity extends AppCompatActivity {
             Log.e("MyAmplifyApp", "Error writing audio file", error);
         }
     }
-//    private void setUpTextToSpeechButton(){
-//        Button readDescriptionButton = findViewById(R.id.taskDetailsDescriptionTextToSpeech);
-//        readDescriptionButton.setOnClickListener(view -> {
-//            TextView taskDescriptionTextView = findViewById(R.id.TaskDetailDescription);
-//            String description = taskDescriptionTextView.getText().toString().trim();
-//            if (!description.isEmpty()) {
-//                Amplify.Predictions.convertTextToSpeech(
-//                        description,
-//                        result -> {
-//                            if (result.getAudioData().read()) {
-//                                Log.e(TAG, "Text-to-speech conversion failed: " + result.getError().toString());
-//                                // Handle failure if needed
-//                            } else {
-//                                // Play the audio
-//                                playAudio(result.get());
-//                            }
-//                        },
-//                        error -> {
-//                            Log.e(TAG, "Text-to-speech conversion error: " + error.toString());
-//                            // Handle error if needed
-//                        }
-//                );
-//            }
-//        });
-//    }
-
 
     @Override
     protected void onResume() {

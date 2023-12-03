@@ -21,7 +21,7 @@ public class TaskAmplifyApp extends Application {
         try{
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin());
+            Amplify.addPlugin(new AWSPinpointAnalyticsPlugin(this));
             Amplify.addPlugin(new AWSPredictionsPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.addPlugin(new AWSLocationGeoPlugin());
