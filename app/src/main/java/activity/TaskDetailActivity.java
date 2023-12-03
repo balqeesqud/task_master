@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.location.Geocoder;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +39,11 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
@@ -51,13 +56,11 @@ public class TaskDetailActivity extends AppCompatActivity {
     private CompletableFuture<Task> taskCompletableFuture = null;
     private CompletableFuture<List<Team>> teamFuture = null;
     private Task taskToEdit = null;
-    private EditText titleEditText;
-    private EditText descriptionEditText;
 
     private Spinner taskStatusSpinner = null;
 
     private Spinner teamSpinner = null;
-
+    private MediaPlayer mp = null;
     ActivityResultLauncher<Intent> activityResultLauncher;
     private String s3ImageKey = "";
     private TextView locationTextView;
@@ -71,6 +74,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail_page);
+
         locationTextView = findViewById(R.id.taskLocationTextView);
 
         geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
@@ -101,7 +105,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         };
 
 
-
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,27 +112,68 @@ public class TaskDetailActivity extends AppCompatActivity {
                 onBackPressed();
             }
 
+            Button editTaskButton = findViewById(R.id.taskDetailsButton);
 
         });
 
-        Button editTaskButton = findViewById(R.id.taskDetailsButton);
-
-
-//        editTaskButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (task != null) {
-//                    Intent editTaskPage = new Intent(TaskDetailActivity.this, EditTaskActivity.class);
-//                    editTaskPage.putExtra(MainActivity.TASK_ID_TAG, task.getId());
-//                    startActivity(editTaskPage);
-//                } else {
-//                    Log.e("TaskDetailActivity", "Task is null");
-//                }
-//            }
-//        });
-//        setUpEditableUIElement();
+        setUpSpeechButton();
 
     }
+    private void setUpSpeechButton(){
+        Button speakButton = (Button) findViewById(R.id.taskDetailsDescriptionTextToSpeech);
+        speakButton.setOnClickListener(b ->
+        {
+            String taskDescription= ((TextView) findViewById(R.id.TaskDetailDescription)).getText().toString();
+
+            Amplify.Predictions.convertTextToSpeech(
+                    taskDescription,
+                    result -> playAudio(result.getAudioData()),
+                    error -> Log.e(TAG,"conversion failed ", error)
+            );
+        });
+    }
+    private void playAudio(InputStream data) {
+        File mp3File = new File(getCacheDir(), "audio.mp3");
+
+        try (OutputStream out = new FileOutputStream(mp3File)) {
+            byte[] buffer = new byte[8 * 1_024];
+            int bytesRead;
+            while ((bytesRead = data.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+            mp.reset();
+            mp.setOnPreparedListener(MediaPlayer::start);
+            mp.setDataSource(new FileInputStream(mp3File).getFD());
+            mp.prepareAsync();
+        } catch (IOException error) {
+            Log.e("MyAmplifyApp", "Error writing audio file", error);
+        }
+    }
+//    private void setUpTextToSpeechButton(){
+//        Button readDescriptionButton = findViewById(R.id.taskDetailsDescriptionTextToSpeech);
+//        readDescriptionButton.setOnClickListener(view -> {
+//            TextView taskDescriptionTextView = findViewById(R.id.TaskDetailDescription);
+//            String description = taskDescriptionTextView.getText().toString().trim();
+//            if (!description.isEmpty()) {
+//                Amplify.Predictions.convertTextToSpeech(
+//                        description,
+//                        result -> {
+//                            if (result.getAudioData().read()) {
+//                                Log.e(TAG, "Text-to-speech conversion failed: " + result.getError().toString());
+//                                // Handle failure if needed
+//                            } else {
+//                                // Play the audio
+//                                playAudio(result.get());
+//                            }
+//                        },
+//                        error -> {
+//                            Log.e(TAG, "Text-to-speech conversion error: " + error.toString());
+//                            // Handle error if needed
+//                        }
+//                );
+//            }
+//        });
+//    }
 
 
     @Override
@@ -210,7 +254,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
             if (taskImage != null) {
                 Log.d("TaskDetailActivity", "Image URL: " + taskImage);
-                String imagePath = "https://taskmaster1ac110bfc191422780d3c37527c67037202659-dev.s3.us-west-2.amazonaws.com/public/"+taskImage;
+                String imagePath = "https://taskmaster1ac110bfc191422780d3c37527c67037202659-dev.s3.us-west-2.amazonaws.com/public/" + taskImage;
                 Log.d("imagePath", "Image path: " + imagePath);
                 Glide.with(this).load(imagePath).into(taskImageView);
             }
