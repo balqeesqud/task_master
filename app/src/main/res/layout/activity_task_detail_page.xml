@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,19 +7,35 @@
     tools:context="activity.TaskDetailActivity">
 
 
+    <Button
+        android:id="@+id/taskDetailsDescriptionTextToSpeech"
+        android:layout_width="162dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="26dp"
+        android:backgroundTint="#BA0F0F"
+        android:text="Text To Speech"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailsImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.97"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/taskLocationTextView"
-        android:layout_width="257dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="318dp"
+        android:layout_width="388dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
         android:text="Location"
         android:textColor="#910B0B"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DescriptionWordTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDetailsImageView" />
 
     <TextView
         android:id="@+id/TeamTextView"
@@ -61,8 +76,8 @@
 
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="21dp"
+        android:layout_width="56dp"
+        android:layout_height="35dp"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="11dp"
         android:adjustViewBounds="false"
@@ -138,32 +153,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.188" />
 
-    <Button
-        android:id="@+id/taskDetailsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#BA0F0F"
-        android:text="Edit Task"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973"
-        tools:ignore="MissingConstraints" />
-
     <ImageView
         android:id="@+id/taskDetailsImageView"
-        android:layout_width="277dp"
-        android:layout_height="164dp"
+        android:layout_width="284dp"
+        android:layout_height="115dp"
         android:layout_marginTop="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TaskDetailDescription"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.489"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@tools:sample/avatars" />
 

@@ -1,0 +1,14 @@
+{
+    "resourceName": "translateTextc5169e70",
+    "convertPolicyName": "translateTextPolicyc5169e70",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "convertType": "translateText",
+    "sourceLang": "en",
+    "targetLang": "it",
+    "access": "authAndGuest"
+}
